@@ -13,6 +13,8 @@ require('./configs/session.config')(app);
 require('./configs/passport.config')(app);
 
 //Routes configurations
+const journeyRouter = require('./routes/journeys.routes');
+app.use('/api/journeys', journeyRouter);
 const authRouter = require('./routes/auth.routes');
 app.use('/api/auth', authRouter);
 

@@ -20,8 +20,6 @@ const userSchema = new Schema(
     profilePic: { type: String, default: '' },
     birthDate: { type: Date },
     startContract: { type: Date },
-    journeyTracker: [{ type: Schema.Types.ObjectId, ref: 'Journey' }],
-    offDays: [{ type: Schema.Types.ObjectId, ref: 'OffDay' }],
   },
   {
     timestamps: true,
