@@ -29,6 +29,7 @@ This is an app to keep a record from each employee working hours, as well as the
 - Async & Await
 - Extra Hours: choose between Off Day or Remuneration
 - Graphic representation of weekly / monthly / anually worked hours
+- Filter journey and off days
 
 # Client / Frontend
 
