@@ -16,4 +16,9 @@ require('./configs/passport.config')(app);
 const index = require('./routes/index');
 app.use('/', index);
 
+// Catch 404 and respond with error message
+app.use((req, res, next) => {
+  return res.status(404).json({ message: 'Not fund' });
+});
+
 module.exports = app;
