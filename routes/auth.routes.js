@@ -73,5 +73,16 @@ router.post('/login', (req, res, next) => {
 
 router.post('/logout', (req, res, next) => {
   req.logout();
-  return res.status(200).json({ message: 'Log out success!'});
-})
+  return res.status(200).json({ message: 'Log out success!' });
+});
+
+router.put('/edit', uploader.single('profilePic'), (req, res, next) => {
+  console.log(req.file);
+  User.findOneAndUpdate(
+    { _id: req.user.id },
+    { ...req.body, profilePic: req.file ? req.file.path : req.user.profilePic },
+    { new: true }
+  )
+    .then((user) => res.status(200).json(user))
+    .catch((error) => res.status(500).json(error));
+});
