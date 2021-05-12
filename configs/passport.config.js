@@ -1,7 +1,7 @@
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const { Strategy: GoogleStrategy } = require('passport-google-oauth20');
-//const User = require('');
+const User = require('../models/User.model');
 const bcrypt = require('bcryptjs');
 
 module.exports = (app) => {
@@ -11,7 +11,7 @@ module.exports = (app) => {
 
   passport.deserializeUser((id, cb) => {
     User.findById(id)
-      .then((user) => cb(null, user.id))
+      .then((user) => cb(null, user))
       .catch((error) => cb(error));
   });
 
