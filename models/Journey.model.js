@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const journeySchema = new Schema(
   {
-    date: {type: Date, required: true},
+    date: {type: Date},
     startHour: { type: Date, required: true },
     endHour: { type: Date },
     startBreak: { type: Date },
