@@ -50,3 +50,23 @@ router.post('/signup', (req, res, next) => {
     })
     .catch((error) => res.status(500).json(error));
 });
+
+router.post('/login', (req, res, next) => {
+  passport.authenticate('local', (error, theUser, failureDetails) => {
+    if (error) {
+      return res.status(500).json(error);
+    }
+
+    if (!theUser) {
+      return res.status(401).json(failureDetails);
+    }
+
+    req.login(theUser, (error) => {
+      if (error) {
+        return res.status(500).json(error);
+      }
+
+      return res.status(200).json(theUser);
+    });
+  })(req, res, next);
+});
