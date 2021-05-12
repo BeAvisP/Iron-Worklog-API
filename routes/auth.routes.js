@@ -7,7 +7,7 @@ const bcrypt = require('bcryptjs');
 const uploader = require('../configs/cloudinary.config');
 const bcryptSalt = 10;
 
-router.post('/signup', isLoggedOut,  (req, res, next) => {
+router.post('/signup', isLoggedOut, (req, res, next) => {
   const { firstName, lastName, email, password } = req.body;
 
   if (password.length < 6) {
@@ -52,7 +52,7 @@ router.post('/signup', isLoggedOut,  (req, res, next) => {
     .catch((error) => res.status(500).json(error));
 });
 
-router.post('/login', isLoggedOut , (req, res, next) => {
+router.post('/login', isLoggedOut, (req, res, next) => {
   passport.authenticate('local', (error, theUser, failureDetails) => {
     if (error) {
       return res.status(500).json(error);
@@ -72,28 +72,42 @@ router.post('/login', isLoggedOut , (req, res, next) => {
   })(req, res, next);
 });
 
-router.post('/logout', isLoggedIn , (req, res, next) => {
+router.post('/logout', isLoggedIn, (req, res, next) => {
   req.logout();
   return res.status(200).json({ message: 'Log out success!' });
 });
 
-router.put('/edit', isLoggedIn , uploader.single('profilePic'), (req, res, next) => {
-  console.log(req.file);
-  User.findOneAndUpdate(
-    { _id: req.user.id },
-    { ...req.body, profilePic: req.file ? req.file.path : req.user.profilePic },
-    { new: true }
-  )
-    .then((user) => res.status(200).json(user))
-    .catch((error) => res.status(500).json(error));
-});
+router.put(
+  '/edit',
+  isLoggedIn,
+  uploader.single('profilePic'),
+  (req, res, next) => {
+    console.log(req.file);
+    User.findOneAndUpdate(
+      { _id: req.user.id },
+      {
+        ...req.body,
+        profilePic: req.file ? req.file.path : req.user.profilePic,
+      },
+      { new: true }
+    )
+      .then((user) => res.status(200).json(user))
+      .catch((error) => res.status(500).json(error));
+  }
+);
 
 router.get('/loggedin', (req, res, next) => {
-  if(req.isAuthenticated()){
+  if (req.isAuthenticated()) {
     return res.status(200).json(req.user);
   } else {
     return res.status(403).json({ message: 'Forbbiden' });
   }
+});
+
+router.delete('/delete', isLoggedIn , (req, res, next) => {
+  User.findByIdAndRemove(req.user.id)
+    .then(() => res.status(200).json({ message: 'User removed' }))
+    .catch((error) => res.status(500).json(error));
 });
 
 module.exports = router;
