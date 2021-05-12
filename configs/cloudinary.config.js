@@ -11,7 +11,7 @@ cloudinary.config({
 const storage = new CloudinaryStorage({
   cloudinary,
   params: {
-    folder: 'project-pictures',
+    folder: 'Employee-Profile-Pic',
     allowed_format: ['png', 'jpg'],
   },
 });
