@@ -3,8 +3,10 @@ const Journey = require('../models/Journey.model');
 const router = express.Router();
 
 router.get('/', (req, res, next) => {
+  console.log(req.user.id)
   Journey.find({ user: req.user.id })
-    .then((journies) => res.status(200).json(journies))
+    .then((journies) => {console.log(journies); 
+      res.status(200).json(journies)})
     .catch((err) => res.status(500).json(err));
 });
 
@@ -19,7 +21,7 @@ router.get('/:id', (req, res, next) => {
 router.post('/', (req, res, next) => {
   const { morningStandup, eveningStandup } = req.body;
 
-  Journey.create({ startHour: Date.now(), morningStandup, eveningStandup })
+  Journey.create({ startHour: Date.now(), morningStandup, eveningStandup, user: req.user.id })
     .then((journey) => res.status(200).json(journey))
     .catch((err) => res.status(500).json(err));
 });
