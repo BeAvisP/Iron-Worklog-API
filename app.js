@@ -13,8 +13,8 @@ require('./configs/session.config')(app);
 require('./configs/passport.config')(app);
 
 //Routes configurations
-const index = require('./routes/index');
-app.use('/', index);
+const journeyRouter = require('./routes/journeys.routes');
+app.use('/api/journeys', journeyRouter);
 
 // Catch 404 and respond with error message
 app.use((req, res, next) => {
