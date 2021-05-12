@@ -18,7 +18,7 @@ app.use('/api/auth', authRouter);
 
 // Catch 404 and respond with error message
 app.use((req, res, next) => {
-  return res.status(404).json({ message: 'Not fund' });
+  return res.status(404).json({ message: 'Not found' });
 });
 
 module.exports = app;
