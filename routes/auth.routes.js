@@ -57,20 +57,41 @@ router.post('/login', isLoggedOut, (req, res, next) => {
     if (error) {
       return res.status(500).json(error);
     }
-
     if (!theUser) {
       return res.status(401).json(failureDetails);
     }
-
     req.login(theUser, (error) => {
       if (error) {
         return res.status(500).json(error);
       }
-
       return res.status(200).json(theUser);
     });
   })(req, res, next);
 });
+
+// Login with google (Social Passport)
+router.get(
+  '/google',
+  passport.authenticate('google', { scope: ['profile', 'email'] })
+);
+
+router.get(
+  '/google/callback',(req, res, next) => {
+  passport.authenticate('google', (error, theUser, failureDetails) => {
+    if (error) {
+      return res.status(500).json(error);
+    }
+    if (!theUser) {
+      return res.status(401).json(failureDetails);
+    }
+    req.login(theUser, (error) => {
+      if (error) {
+        return res.status(500).json(error);
+      }
+      return res.status(200).json(theUser);
+    });
+  })(req, res, next)
+  });
 
 router.post('/logout', isLoggedIn, (req, res, next) => {
   req.logout();
@@ -104,7 +125,7 @@ router.get('/loggedin', (req, res, next) => {
   }
 });
 
-router.delete('/delete', isLoggedIn , (req, res, next) => {
+router.delete('/delete', isLoggedIn, (req, res, next) => {
   User.findByIdAndRemove(req.user.id)
     .then(() => res.status(200).json({ message: 'User removed' }))
     .catch((error) => res.status(500).json(error));
