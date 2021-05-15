@@ -5,7 +5,7 @@ const offDaySchema = new Schema(
   {
     startDay: { type: Date, required: true },
     endDay: { type: Date, required: true },
-    type: { type: String, required: true },
+    type: { type: String, required: true, enum: ["holidays", "off-days", "sickness"] },
     user: {
       type: Schema.Types.ObjectId,
       ref: 'User',

@@ -3,9 +3,8 @@ const Journey = require('../models/Journey.model');
 const router = express.Router();
 
 router.get('/', (req, res, next) => {
-  console.log(req.user.id)
   Journey.find({ user: req.user.id })
-    .then((journies) => {console.log(journies); 
+    .then((journies) => { 
       res.status(200).json(journies)})
     .catch((err) => res.status(500).json(err));
 });
@@ -36,8 +35,9 @@ router.put('/:id', (req, res, next) => {
 
 router.delete('/:id', (req, res, next) => {
   const { id } = req.params;
-  Journey.findOneAndRemove({ _id: id, user: req.user.id})
-  .then(() => res.status(200).json({ message: `Journey ${id} deleted`}))
+
+  Journey.findOneAndRemove({ _id: id, user: req.user.id })
+  .then(() => res.status(200).json({ message: `Journey ${id} deleted` }))
   .catch(err => res.status(500).json(err))
 })
 

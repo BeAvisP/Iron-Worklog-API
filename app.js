@@ -13,10 +13,13 @@ require('./configs/session.config')(app);
 require('./configs/passport.config')(app);
 
 //Routes configurations
+const offDayRouter = require('./routes/offdays.routes')
 const journeyRouter = require('./routes/journeys.routes');
-app.use('/api/journeys', journeyRouter);
 const authRouter = require('./routes/auth.routes');
+app.use('/api/offdays', offDayRouter);
+app.use('/api/journeys', journeyRouter);
 app.use('/api/auth', authRouter);
+
 
 // Catch 404 and respond with error message
 app.use((req, res, next) => {
