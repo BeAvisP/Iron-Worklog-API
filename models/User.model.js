@@ -17,7 +17,11 @@ const userSchema = new Schema(
         'Please fill a valid password',
       ],
     },
-    profilePic: { type: String, default: '' },
+    profilePic: {
+      type: String,
+      default:
+        'https://res.cloudinary.com/ironworklog/image/upload/v1621241201/Employee-Profile-Pic/default_pic_jjgtbu.png',
+    },
     birthDate: { type: Date },
     startContract: { type: Date },
   },
