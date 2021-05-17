@@ -47,7 +47,7 @@ module.exports = (app) => {
         callbackURL: process.env.GOOGLE_CALLBACK,
       },
       (accesToken, refreshToken, profile, cb) => {
-        User.findOne({ email: porfile._json.email })
+        User.findOne({ email: profile._json.email })
           .then((user) => {
             if (user) {
               cb(null, user);
@@ -56,10 +56,11 @@ module.exports = (app) => {
             console.log(profile);
             User.create({
               email: profile._json.email,
-              name: profile.displayName,
+              firstName: profile._json.given_name,
+              lastName: profile._json.family_name,
               profile_pic: profile._json.picture,
             })
-              .then((newUSer) => {
+              .then((newUser) => {
                 cb(null, newUser);
               })
               .catch((error) => cb(error));
