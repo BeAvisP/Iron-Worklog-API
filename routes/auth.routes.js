@@ -88,11 +88,15 @@ router.get(
       if (error) {
         return res.status(500).json(error);
       }
-      return res.status(200).json(theUser);
+      return res.redirect(`${process.env.PUBLIC_DOMAIN}/dashboard`);
     });
   })(req, res, next)
   });
 
+
+  router.get('/googlefailure', (req, res, next) => {
+    return res.status(401).json({ message: 'Unauthorized' });
+  });
 router.post('/logout', isLoggedIn, (req, res, next) => {
   req.logout();
   return res.status(200).json({ message: 'Log out success!' });
