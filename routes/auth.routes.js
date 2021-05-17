@@ -93,10 +93,6 @@ router.get(
   })(req, res, next)
   });
 
-
-  router.get('/googlefailure', (req, res, next) => {
-    return res.status(401).json({ message: 'Unauthorized' });
-  });
 router.post('/logout', isLoggedIn, (req, res, next) => {
   req.logout();
   return res.status(200).json({ message: 'Log out success!' });
