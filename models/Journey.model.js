@@ -4,10 +4,10 @@ const Schema = mongoose.Schema;
 const journeySchema = new Schema(
   {
     date: {type: Date},
-    startHour: { type: Date, required: true },
-    endHour: { type: Date },
-    startBreak: { type: Date },
-    endBreak: { type: Date },
+    startHour: { type: String, required: true },
+    endHour: { type: String },
+    startBreak: { type: String },
+    endBreak: { type: String },
     morningStandup: { type: String },
     eveningStandup: { type: String },
     user: {
