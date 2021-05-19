@@ -1,10 +1,11 @@
 require('dotenv').config();
 const express = require('express');
-
+const { default: sslRedirect } = require('heroku-ssl-redirect');
 //DB Configuration
 require('./configs/db.config');
 
 const app = express();
+app.use(sslRedirect())
 
 // Middleware Setup
 require('./configs/middleware.config')(app);
@@ -16,6 +17,7 @@ require('./configs/passport.config')(app);
 const offDayRouter = require('./routes/offdays.routes')
 const journeyRouter = require('./routes/journeys.routes');
 const authRouter = require('./routes/auth.routes');
+
 app.use('/api/offdays', offDayRouter);
 app.use('/api/journeys', journeyRouter);
 app.use('/api/auth', authRouter);
