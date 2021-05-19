@@ -6,7 +6,7 @@ const path = require('path');
 require('./configs/db.config');
 
 const app = express();
-//app.use(sslRedirect())
+app.use(sslRedirect())
 
 // Middleware Setup
 require('./configs/middleware.config')(app);
