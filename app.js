@@ -1,7 +1,7 @@
 require('dotenv').config();
 const express = require('express');
 const { default: sslRedirect } = require('heroku-ssl-redirect');
-
+const path = require('path');
 //DB Configuration
 require('./configs/db.config');
 
