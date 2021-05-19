@@ -12,7 +12,7 @@ const storage = new CloudinaryStorage({
   cloudinary,
   params: {
     folder: 'Employee-Profile-Pic',
-    allowed_format: ['png', 'jpg'],
+    allowed_format: ['png', 'jpg', 'jpeg'],
   },
 });
 
