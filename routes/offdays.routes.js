@@ -21,7 +21,7 @@ router.get('/:id', (req, res, next) => {
 router.post('/', (req, res, next) => {
   const { startDay, endDay, type } = req.body;
 
-  OffDay.create({ startDay: Date(startDay), endDay: Date(endDay), type, user: req.user.id })
+  OffDay.create({ startDay, endDay, type, user: req.user.id })
   .then((offday) => res.status(200).json(offday))
   .catch((err) => res.status(500).json(err));
 });
