@@ -53,7 +53,6 @@ module.exports = (app) => {
               cb(null, user);
               return;
             }
-            console.log(profile);
             User.create({
               email: profile._json.email,
               firstName: profile._json.given_name,

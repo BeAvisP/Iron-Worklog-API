@@ -103,7 +103,6 @@ router.put(
   isLoggedIn,
   uploader.single('profilePic'),
   (req, res, next) => {
-    console.log(req.file);
     User.findOneAndUpdate(
       { _id: req.user.id },
       {

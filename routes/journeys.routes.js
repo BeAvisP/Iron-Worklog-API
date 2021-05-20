@@ -27,7 +27,6 @@ router.post('/', (req, res, next) => {
 
 router.put('/:id', (req, res, next) => {
   const { id } = req.params;
-  console.log(req.body);
   Journey.findOneAndUpdate({ _id: id, user: req.user.id }, req.body, { new: true })
     .then((journey) => res.status(200).json(journey))
     .catch((err) => res.status(500).json(err));
